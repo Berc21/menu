@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <style>
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/* Starts here */
+
+
+    .container {
+  max-width: 400px;
+  margin: 20px auto;
+ 
+}
+.main-menu {
+  cursor: pointer;
+  background-color: #E91E63;
+  
+}
+.main-menu__element {
+  list-style-type: none;
+  color: white;
+  text-transform: uppercase;
+  padding: 20px 10px;
+  position: relative;
+  padding-left: 20px;
+  }
+.main-menu__element--active  {
+  background-color: rgb(245, 186, 199);
+}
+
+.main-menu__count {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #fff;
+  border-radius: 50%;
+  padding: 10px;
+  font-weight: bold;
+  background: #673AB7;
+  width: 20px;
+  height: 20px;
+  display: block;
+  text-align: center;
+
+}
+
+.sub-menu:active {
+  transition: all 1s ease-out;
+}
+.sub-menu__element{
+  list-style-type: none;
+  color: white;
+  text-transform: uppercase;
+  padding: 20px 10px;
+  position: relative;
+  margin-left: 20px;
+ 
+}
+.sub-menu__link {
+  text-decoration: none;
+  color: inherit;
+}
+.fade-enter-active {
+  transition: all 1s ease;
+    }
+.fade-enter {
+      opacity: 0
+    }
+
+
+  
+  </style>
+</head>
+<body>
+    <main id="vue" >
+    <div  class="container">
+      <ul class="main-menu">
+        <li class="main-menu__element" v-for="item in menu"  :class="{'main-menu__element--active': item.open}" >
+          <a  v-if="item.submenu.length > 1"  @click="toggle(item)" v-text="item.name" >
+          </a>
+          <a v-else v-text="item.name"></a>
+
+           <span class="main-menu__count" v-show="item.submenu.length > 1" v-text="item.submenu.length"></span>
+           <transition name="fade" mode="out-in" >
+           <ul class="sub-menu" v-show="item.open" >
+           <li class="sub-menu__element" v-for="subitem in item.submenu" ><a class="sub-menu__link" :href="subitem.link" v-text="subitem.name" > </a></li>
+         
+          </ul>
+        </transition>
+        </li>
+        </ul>
+      </div>
+    </main>
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+      <script src="app.js"></script>
+
+</body>
+</html>
